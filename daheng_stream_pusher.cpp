@@ -1,24 +1,30 @@
 #include "daheng_stream_pusher.h"
 
-void debug() {
-    QMessageBox::information(nullptr, "debug",
-        QString::number(CameraReader::getInstance().getServerCount()));
-
-    std::vector<std::string>* names = CameraReader::getInstance().getServerNames();
-    QMessageBox::information(nullptr, "debug",
-        QString::fromStdString(names->at(0)));
-}
-
-
-daheng_stream_pusher::daheng_stream_pusher(QWidget *parent)
+DahengStreamPusher::DahengStreamPusher(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
 
-    debug();
+    QObject::connect(ui.connectButton, &QPushButton::clicked, [&] {onClickConnect(); });
+    QObject::connect(ui.grabButton, &QPushButton::clicked, [&] {onClickGrab(); });
+    QObject::connect(ui.freezeButton, &QPushButton::clicked, [&] {onClickFreeze(); });
 }
 
-daheng_stream_pusher::~daheng_stream_pusher()
-{
+void DahengStreamPusher::onClickGrab() {
+    if (CameraReader::getInstance().grab(0)) {
+        ui.grabButton->setDisabled(true);
+        ui.freezeButton->setDisabled(false);
+    }
+}
 
+void DahengStreamPusher::onClickFreeze() {
+    QMessageBox::information(nullptr, "callback", QString::number(CameraReader::getInstance().freeze()));
+    //if (CameraReader::getInstance().freeze()) {
+        ui.grabButton->setDisabled(false);
+        ui.freezeButton->setDisabled(true);
+    //}
+}
+
+void DahengStreamPusher::onClickConnect() {
+    int outcome = CameraReader::getInstance().connect();
 }

@@ -52,21 +52,52 @@ void CameraReader::setDeviceInfo() {
     }
 }
 
-int CameraReader::setupCamera() {
+int CameraReader::connect() {
     setDeviceInfo();
     location = new SapLocation(deviceIndex, SapManager::ResourceAcq);
-
     acqDevice = new SapAcqDevice(*location, FALSE);
-    acqDevice->Create();
+    if (!acqDevice->Create()) {
+        return SetupState::deviceNotCreated;
+    }
+    imageBuffer = new SapBufferWithTrash(1, acqDevice);
+    if (!imageBuffer->Create()) {
+        return SetupState::bufferNotCreated;
+    }
+    transfer = new SapAcqDeviceToBuf(acqDevice, imageBuffer, handleCallback, this);
+    if (transfer && !transfer->Create()) {
+        return SetupState::xFerNotCreated;
+    }    
 
-    imageBuffer = new SapBufferWithTrash(2, acqDevice);
-    imageBuffer->Create();
-
-    //transfer = new SapAcqDeviceToBuf(acqDevice, imageBuffer, *callback->onGetBuffer, this);
-
-    return 0;
+    readyToGrab = true;
+    return SetupState::ready;
 }
 
-void CameraReader::setCallbackMethod(ReadCallbackFactory* callback) {
-    this->callback = callback;
+void CameraReader::handleCallback(SapXferCallbackInfo* pInfo) {
+    handleMode = pInfo->GetTransfer()->GetFrameRateStatistics()->GetLiveFrameRate();
+
+    //TODO: 获取原始数据，通过OpenCV中imread读入
 }
+
+bool CameraReader::grab(int mode) {
+    if (!readyToGrab) {
+        return false;
+    }
+
+    handleMode = mode;
+    transfer->Grab();
+    onGrabing = true;
+    return true;
+}
+
+int CameraReader::freeze() {
+    transfer->Freeze();
+    if (!transfer->Wait(500)) {
+        return false;
+    }
+    else {
+        onGrabing = false;
+        return handleMode;
+    }
+}
+
+int CameraReader::handleMode = HandleMode::infoOnly;

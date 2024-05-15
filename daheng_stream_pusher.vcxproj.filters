@@ -58,9 +58,6 @@
     <ClCompile Include="camera_reader.cpp">
       <Filter>Source Files\camera</Filter>
     </ClCompile>
-    <ClCompile Include="read_callback_factory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="daheng_stream_pusher.h">
@@ -70,9 +67,6 @@
   <ItemGroup>
     <ClInclude Include="camera_reader.h">
       <Filter>Header Files\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="read_callback_factory.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -101,7 +101,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="read_callback_factory.cpp" />
     <QtRcc Include="daheng_stream_pusher.qrc" />
     <QtUic Include="daheng_stream_pusher.ui" />
     <QtMoc Include="daheng_stream_pusher.h" />
@@ -113,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera_reader.h" />
-    <ClInclude Include="read_callback_factory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

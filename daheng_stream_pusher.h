@@ -6,14 +6,22 @@
 #include <QMessageBox>
 #include "ui_daheng_stream_pusher.h"
 
-class daheng_stream_pusher : public QMainWindow
+class DahengStreamPusher : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    daheng_stream_pusher(QWidget *parent = nullptr);
-    ~daheng_stream_pusher();
+    DahengStreamPusher(QWidget *parent = nullptr);
+    ~DahengStreamPusher() = default;
+
+    void onClickGrab();
+
+    void onClickFreeze();
+
+    void onClickConnect();
 
 private:
     Ui::MainWidget ui;
+
+    bool grabing = false;
 };

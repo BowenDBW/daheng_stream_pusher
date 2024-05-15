@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    daheng_stream_pusher w;
+    DahengStreamPusher w;
     w.show();
 
     return a.exec();
