@@ -1,8 +1,12 @@
 #pragma once
 
+#include "image_converter.h"
+#include "camera_info.h"
+
 #include <dalsa/sapclassbasic.h>
 
 #include <string>
+#include <queue>
 
 /// <summary>
 ///     this enum tells outcome when calling setupCamera
@@ -11,31 +15,22 @@ enum SetupState {
     deviceNotCreated = 0,
     bufferNotCreated,
     xFerNotCreated,
+    FeatureNotCreated,
     ready
-};
-
-/// <summary>
-///     this enum tells how will callback function operate camera's data
-/// </summary>
-enum HandleMode {
-    infoOnly = 0,
-    opencvUi,
-    rtmp,
-    rtsp
 };
 
 /// <summary>
 ///     This class defines how camera is connected 
 ///     and source image is read from da_hang camera
 /// </summary>
-class CameraReader
+class DalsaLineCamera
 {
 public:
     /// <summary>
     ///     get singleton instance of this class
     /// </summary>
     /// <returns>the only instance of this class</returns>
-    static CameraReader& getInstance();
+    static DalsaLineCamera& getInstance();
 
     /// <summary>
     ///     this function operate data received from camera
@@ -72,15 +67,25 @@ public:
     /// </summary>
     /// <param name="mode"></param>
     /// <returns>is the grab begins</returns>
-    bool grab(int mode);
+    bool grab(const int& mode);
 
     /// <summary>
     ///     stop receiving data
     /// </summary>
     /// <returns>is the grab ends</returns>
-    int freeze();
+    bool freeze();
+
+    /// <summary>
+    ///     return its info from callback function
+    /// </summary>
+    /// <returns></returns>
+    std::string getInfos();
 
 private:
+    /// <summary>
+    ///     record device info
+    /// </summary>
+    std::string infoString;
     /// <summary>
     ///     signal to tell whether camera is in grabbing
     /// </summary>
@@ -89,10 +94,6 @@ private:
     ///     signal to tell whether camera is all set and ready to grab
     /// </summary>
     bool readyToGrab = false;
-    /// <summary>
-    ///     signal to tell callback fucntion how to operate the data
-    /// </summary>
-    static int handleMode;
     /// <summary>
     ///     to store daheng camera's index
     /// </summary>
@@ -105,27 +106,31 @@ private:
     SapManager* manager = new SapManager();
     SapAcqDevice* acqDevice;
     SapLocation* location;
-    SapBuffer* imageBuffer;
-    SapTransfer* transfer;
-    SapView* view;
+    static SapBuffer* sapBuffer;
+    static SapTransfer* transfer;
+    SapFeature* feature;
+
+    static unsigned char* imageBuffer;
+    static unsigned char* tempBuffer;
 
     /// <summary>
     ///     to set device features in this class
     /// </summary>
-    void setDeviceInfo();
-    
+    void setDeviceName();
+
     /// <summary>
     ///     default constructor, not callable in singleton mode
     /// </summary>
-    CameraReader() = default;
+    DalsaLineCamera() = default;
     /// <summary>
     ///     default destructor, not callable in singleton mode
     /// </summary>
-    ~CameraReader() = default;
+    ~DalsaLineCamera() = default;
     /// <summary>
     ///     copy constructor, not callable in singleton mode
     /// </summary>
-    CameraReader(const CameraReader&);
-    CameraReader& operator=(const CameraReader&);
+    DalsaLineCamera(const DalsaLineCamera&);
+    DalsaLineCamera& operator=(const DalsaLineCamera&);
 };
+
 

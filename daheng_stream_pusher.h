@@ -1,6 +1,6 @@
 #pragma once
 
-#include "camera_reader.h"
+#include "dalsa_line_camera.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QMessageBox>
