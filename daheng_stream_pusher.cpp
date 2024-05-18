@@ -20,6 +20,18 @@ DahengStreamPusher::DahengStreamPusher(QWidget *parent)
     QObject::connect(ui.intervalSpin, &QSpinBox::valueChanged, [&] {onIntervalChanged(); });
     QObject::connect(ui.serverEdit, &QLineEdit::textChanged, [&] {onRtmpUrlChanged(); });
     QObject::connect(ui.savePathEdit, &QLineEdit::textChanged, [&] {onSavePathChanged(); });
+}
+
+void DahengStreamPusher::init() {
+
+    ui.showHudBox->setChecked(IniParser::getShowHub());
+    ui.opencvBox->setChecked(IniParser::getShowOpencv());
+    ui.saveBox->setChecked(IniParser::getSaveImage());
+    ui.pushBox->setChecked(IniParser::getPushStream());
+
+    ui.intervalSpin->setValue(IniParser::getSaveInterval());
+    ui.savePathEdit->setText(QString::fromStdString(IniParser::getSavePath()));
+    ui.serverEdit->setText(QString::fromStdString(IniParser::getRtmpUrl()));
 
     ImageConverter::setPixmap(ui.imagePixmap);
     scanDevices();
@@ -67,7 +79,7 @@ void DahengStreamPusher::onClickGrab() {
         return;
     }
 
-    if (DalsaLineCamera::getInstance().grab(HandleMode::liveView)) {
+    if (DalsaLineCamera::getInstance().grab()) {
         ui.showHudBox->setDisabled(true);
         ui.saveBox->setDisabled(true);
         ui.pushBox->setDisabled(true);
@@ -138,6 +150,11 @@ void DahengStreamPusher::restart() {
 }
 
 void DahengStreamPusher::onBoxClicked() {
+    IniParser::setShowHub(ui.showHudBox->isChecked());
+    IniParser::setShowOpencv(ui.opencvBox->isChecked());
+    IniParser::setSaveImage(ui.saveBox->isChecked());
+    IniParser::setPushStream(ui.pushBox->isChecked());
+
     ImageConverter::setOption(
         ui.showHudBox->isChecked(),
         ui.saveBox->isChecked(),
@@ -147,14 +164,17 @@ void DahengStreamPusher::onBoxClicked() {
 }
 
 void DahengStreamPusher::onIntervalChanged() {
+    IniParser::setSaveInterval(ui.intervalSpin->value());
     ImageConverter::setSaveInterval(ui.intervalSpin->value());
 }
 
 void DahengStreamPusher::onRtmpUrlChanged() {
+    IniParser::setRtmpUrl(ui.serverEdit->text().toStdString());
     ImageConverter::setRtmpUrl(ui.serverEdit->text().toStdString());
 }
 
 void DahengStreamPusher::onSavePathChanged() {
+    IniParser::setSavePath(ui.savePathEdit->text().toStdString());
     ImageConverter::setFileSavePath(ui.savePathEdit->text().toStdString());
 }
 

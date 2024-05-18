@@ -33,6 +33,12 @@
     <Filter Include="Source Files\camera">
       <UniqueIdentifier>{7265b128-c57e-4e35-9751-f4faf749e117}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{e881a37b-015c-43b4-a676-7af000560096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{555bd74e-06ea-4eb6-8e9d-584aa3947b50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="daheng_stream_pusher.qrc">
@@ -61,6 +67,9 @@
     <ClCompile Include="image_converter.cpp">
       <Filter>Source Files\camera</Filter>
     </ClCompile>
+    <ClCompile Include="ini_parser.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="daheng_stream_pusher.h">
@@ -74,5 +83,12 @@
     <ClInclude Include="image_converter.h">
       <Filter>Header Files\camera</Filter>
     </ClInclude>
+    <ClInclude Include="ini_parser.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.ini" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

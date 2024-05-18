@@ -71,6 +71,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\opencv;$(SolutionDir)dependencies\lib\ffmpeg;$(SolutionDir)dependencies\lib\dalsa;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_world490d.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SapClassBasic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -101,19 +105,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <QtRcc Include="daheng_stream_pusher.qrc" />
     <QtUic Include="daheng_stream_pusher.ui" />
     <QtMoc Include="daheng_stream_pusher.h" />
     <ClCompile Include="dalsa_line_camera.cpp" />
     <ClCompile Include="daheng_stream_pusher.cpp" />
     <ClCompile Include="image_converter.cpp" />
+    <ClCompile Include="ini_parser.cpp" />
     <ClCompile Include="main.cpp" />
+    <None Include="config.ini" />
     <None Include="daheng_stream_pusher.ico" />
     <ResourceCompile Include="daheng_stream_pusher.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dalsa_line_camera.h" />
     <ClInclude Include="image_converter.h" />
+    <ClInclude Include="ini_parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

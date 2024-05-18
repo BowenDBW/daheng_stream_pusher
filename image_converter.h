@@ -7,15 +7,6 @@
 
 #include <QLabel>
 
-/// <summary>
-///     this enum tells how will callback function operate camera's data
-/// </summary>
-enum HandleMode {
-	infoOnly = 0,
-	liveView,
-	localSave,
-	rtmp,
-};
 
 class ImageConverter
 {
@@ -71,10 +62,6 @@ private:
 	static bool saveImage;
 
 	static bool pushStream;
-	/// <summary>
-	///     signal to tell callback fucntion how to operate the data
-	/// </summary>
-	static int handleMode;
 
 	static int fps;
 

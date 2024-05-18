@@ -66,7 +66,7 @@ public:
     /// </summary>
     /// <param name="mode"></param>
     /// <returns>is the grab begins</returns>
-    bool grab(const int& mode);
+    bool grab();
 
     /// <summary>
     ///     stop receiving data

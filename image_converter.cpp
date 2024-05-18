@@ -7,7 +7,6 @@ bool ImageConverter::showExternOpencvWindow = false;
 
 int ImageConverter::totalReceive = 0;
 int ImageConverter::fps = 0;
-int ImageConverter::handleMode = HandleMode::infoOnly;
 int ImageConverter::imageWidth = DEFAULT_WIDTH;
 int ImageConverter::imageHeight = DEFAULT_HEIGHT;
 int ImageConverter::saveInterval = 100;
@@ -113,9 +112,8 @@ void ImageConverter::init(const int& width, const int& height) {
 	consumer.detach();
 }
 
-void ImageConverter::reset(const int& mode) {
+void ImageConverter::reset() {
 	totalReceive = 0;
-	handleMode = mode;
 }
 
 void ImageConverter::rtmpStreaming(cv::Mat* rawMat) {

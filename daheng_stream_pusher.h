@@ -1,6 +1,7 @@
 #pragma once
 
 #include "dalsa_line_camera.h"
+#include "ini_parser.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QMessageBox>
@@ -28,6 +29,8 @@ private:
 
     std::string getTrueFalseString(bool flag);
 
+    void init();
+    
     void onClickGrab();
 
     void onClickFreeze();
