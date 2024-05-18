@@ -4,6 +4,11 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QMessageBox>
+#include <QProcess>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+#include<QFileDialog>
+
 #include "ui_daheng_stream_pusher.h"
 
 class DahengStreamPusher : public QMainWindow
@@ -14,14 +19,32 @@ public:
     DahengStreamPusher(QWidget *parent = nullptr);
     ~DahengStreamPusher() = default;
 
+private:
+    Ui::MainWidget ui;
+
+    bool connected = false;
+
+    bool grabing = false;
+
+    std::string getTrueFalseString(bool flag);
+
     void onClickGrab();
 
     void onClickFreeze();
 
     void onClickConnect();
 
-private:
-    Ui::MainWidget ui;
+    void scanDevices();
 
-    bool grabing = false;
+    void restart();
+
+    void onBoxClicked();
+
+    void onFolderButtonClicked();
+
+    void onIntervalChanged();
+
+    void onRtmpUrlChanged();
+
+    void onSavePathChanged();
 };

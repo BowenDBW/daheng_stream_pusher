@@ -104,7 +104,6 @@
     <QtRcc Include="daheng_stream_pusher.qrc" />
     <QtUic Include="daheng_stream_pusher.ui" />
     <QtMoc Include="daheng_stream_pusher.h" />
-    <ClCompile Include="camera_info.cpp" />
     <ClCompile Include="dalsa_line_camera.cpp" />
     <ClCompile Include="daheng_stream_pusher.cpp" />
     <ClCompile Include="image_converter.cpp" />
@@ -113,7 +112,6 @@
     <ResourceCompile Include="daheng_stream_pusher.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera_info.h" />
     <ClInclude Include="dalsa_line_camera.h" />
     <ClInclude Include="image_converter.h" />
   </ItemGroup>

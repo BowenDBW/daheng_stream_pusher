@@ -1,7 +1,6 @@
 #pragma once
 
 #include "image_converter.h"
-#include "camera_info.h"
 
 #include <dalsa/sapclassbasic.h>
 
@@ -110,7 +109,6 @@ private:
     static SapTransfer* transfer;
     SapFeature* feature;
 
-    static unsigned char* imageBuffer;
     static unsigned char* tempBuffer;
 
     /// <summary>

@@ -5,12 +5,14 @@
 #include <mutex>
 #include <opencv2/opencv.hpp>
 
+#include <QLabel>
+
 /// <summary>
 ///     this enum tells how will callback function operate camera's data
 /// </summary>
 enum HandleMode {
 	infoOnly = 0,
-	opencvUi,
+	liveView,
 	localSave,
 	rtmp,
 };
@@ -29,7 +31,24 @@ public:
 
 	static int getHeight();
 
+	static std::string getFileSavePath();
+
+	static void setOption(bool shallShowHud, bool shallSaveImage, 
+		bool shallPushStream, bool shallShowExternOpencvWindow);
+
 	static void setFps(int newFps);
+
+	static int getSaveInterval();
+
+	static std::string getRtmpUrl();
+
+	static void setSaveInterval(int interval);
+
+	static void setRtmpUrl(std::string url);
+
+	static void setFileSavePath(std::string path);
+
+	static void setPixmap(QLabel* label);
 
 	static void consumeImageThread();
 
@@ -44,6 +63,14 @@ public:
 private:
 
 	static std::string OPENCV_WINDOW_NAME;
+
+	static bool showHud;
+
+	static bool showExternOpencvWindow;
+
+	static bool saveImage;
+
+	static bool pushStream;
 	/// <summary>
 	///     signal to tell callback fucntion how to operate the data
 	/// </summary>
@@ -57,9 +84,13 @@ private:
 
 	static int imageHeight;
 
-	static int opencvWindowScale;
+	static int saveInterval;
 
-	static int opencvWindowBarWidth;
+	static QLabel* pixmap;
+
+	static std::string fileSavePath;
+
+	static std::string rtmpUrl;
 
 	static std::mutex* mu;
 
@@ -67,16 +98,18 @@ private:
 
 	static std::queue<unsigned char*>* images;
 
-	static void rtmpStreaming(unsigned char* data);
+	static void rtmpStreaming(cv::Mat* rawMat);
 
-	static void localSave(unsigned char* data);
+	static void localSave(cv::Mat* rawMat);
 
-	static void showInOpencv(unsigned char* data);
+	static void showInOpencv(cv::Mat* rawMat);
 
-	static void infoOnly();
+	static void showInPixmap(cv::Mat* rawMat);
 
-	static void printInfos(cv::Mat image);
+	static void printInfos(cv::Mat image, bool darkText);
 
-	static cv::Mat arrayToCvMat(unsigned char* data);
+	static cv::Mat* arrayToCvMat(unsigned char* data);
+
+	static cv::Mat rawToDisplayMat(cv::Mat* rawMat);
 };
 

@@ -1,5 +1,10 @@
 #include "dalsa_line_camera.h"
 
+unsigned char* DalsaLineCamera::tempBuffer = nullptr;
+
+SapBuffer* DalsaLineCamera::sapBuffer = nullptr;
+SapTransfer* DalsaLineCamera::transfer = nullptr;
+
 DalsaLineCamera& DalsaLineCamera::getInstance() {
     static DalsaLineCamera instance;
     return instance;
@@ -114,16 +119,11 @@ void DalsaLineCamera::handleCallback(SapXferCallbackInfo* pInfo) {
         transfer->GetFrameRateStatistics()->GetLiveFrameRate()
     );
 
+    unsigned char* imageBuffer =
+        new unsigned char[ImageConverter::getWidth() * ImageConverter::getHeight() * 3];
+
     sapBuffer->GetAddress((void**)&(tempBuffer));
     memcpy(imageBuffer, tempBuffer, ImageConverter::getWidth() * ImageConverter::getHeight() * 3);
 
     ImageConverter::produceImageData(imageBuffer);
 }
-
-unsigned char* DalsaLineCamera::imageBuffer =
-    new unsigned char[ImageConverter::getWidth() * ImageConverter::getHeight() * 3];
-
-unsigned char* DalsaLineCamera::tempBuffer = nullptr;
-
-SapBuffer* DalsaLineCamera::sapBuffer = nullptr;
-SapTransfer* DalsaLineCamera::transfer = nullptr;

@@ -61,9 +61,6 @@
     <ClCompile Include="image_converter.cpp">
       <Filter>Source Files\camera</Filter>
     </ClCompile>
-    <ClCompile Include="camera_info.cpp">
-      <Filter>Source Files\camera</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="daheng_stream_pusher.h">
@@ -75,9 +72,6 @@
       <Filter>Header Files\camera</Filter>
     </ClInclude>
     <ClInclude Include="image_converter.h">
-      <Filter>Header Files\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="camera_info.h">
       <Filter>Header Files\camera</Filter>
     </ClInclude>
   </ItemGroup>
