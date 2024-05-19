@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClInclude Include="dalsa_line_camera.h" />
     <ClInclude Include="image_converter.h" />
+    <ClInclude Include="ini.hpp" />
     <ClInclude Include="ini_parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

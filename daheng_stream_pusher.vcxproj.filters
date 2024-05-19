@@ -86,6 +86,9 @@
     <ClInclude Include="ini_parser.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="ini.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini" />

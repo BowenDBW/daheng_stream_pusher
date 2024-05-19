@@ -41,7 +41,6 @@ std::string ImageConverter::getFileSavePath() {
 	return fileSavePath;
 }
 
-
 void ImageConverter::setFps(int newFps) {
 	fps = newFps;
 }
@@ -82,12 +81,12 @@ void ImageConverter::consumeImageThread() {
 
 		cv::Mat* rawMat = arrayToCvMat(data);
 
-		std::thread thread1(showInOpencv, rawMat);
 		std::thread thread2(showInPixmap, rawMat);
 		std::thread thread3(localSave, rawMat);
 		std::thread thread4(rtmpStreaming, rawMat);
 
-		thread1.join();
+		showInOpencv(rawMat);
+
 		thread2.join();
 		thread3.join();
 		thread4.join();

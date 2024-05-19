@@ -5,6 +5,8 @@ DahengStreamPusher::DahengStreamPusher(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
+
+    init();
     
     QObject::connect(ui.connectButton, &QPushButton::clicked, [&] {onClickConnect(); });
     QObject::connect(ui.grabButton, &QPushButton::clicked, [&] {onClickGrab(); });
