@@ -8,7 +8,7 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
-#include<QFileDialog>
+#include <QFileDialog>
 
 #include "ui_daheng_stream_pusher.h"
 

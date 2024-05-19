@@ -93,6 +93,7 @@ void IniParser::setSaveInterval(int interval) {
 
 std::string IniParser::getSavePath() {
     std::string value = getValue("storage", "savePath");
+    return value;
 }
 
 void IniParser::setSavePath(std::string path) {
@@ -101,6 +102,7 @@ void IniParser::setSavePath(std::string path) {
 
 std::string IniParser::getRtmpUrl() {
     std::string value = getValue("streaming", "url");
+    return value;
 }
 
 void IniParser::setRtmpUrl(std::string url) {
@@ -109,6 +111,7 @@ void IniParser::setRtmpUrl(std::string url) {
 
 std::string IniParser::getLogPath() {
     std::string value = getValue("log", "logPath");
+    return value;
 }
 
 void IniParser::setLogPath(std::string path) {

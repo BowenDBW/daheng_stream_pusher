@@ -49,7 +49,7 @@ public:
 
 	static void init(const int& width, const int& height);
 
-	static void reset(const int& mode);
+	static void reset();
 
 private:
 

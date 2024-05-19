@@ -86,7 +86,7 @@ int DalsaLineCamera::connect() {
 
 bool DalsaLineCamera::grab() {
 
-    ImageConverter::reset(mode);
+    ImageConverter::reset();
 
     if (!readyToGrab) {
         return false;

@@ -14,7 +14,34 @@ enum LogLevel {
     DEBUG = 0,
     INFO,
     WARNING,
-    ERROR,
+    FATAL,
+};
+
+//INI文件结点存储结构
+class IniNode
+{
+public:
+    IniNode(std::string root, std::string key, std::string value)
+    {
+        this->root = root;
+        this->key = key;
+        this->value = value;
+    }
+    std::string root;
+    std::string key;
+    std::string value;
+};
+
+//键值对结构体
+class SubNode
+{
+public:
+    static void InsertElement(std::string key, std::string value)
+    {
+        sub_node.insert(std::pair<std::string, std::string>(key, value));
+    }
+
+    static std::map<std::string, std::string> sub_node;
 };
 
 //INI文件操作类
@@ -112,31 +139,4 @@ private:
     ///     清空
     /// </summary>
     static void clear();
-};
-
-//INI文件结点存储结构
-class IniNode
-{
-public:
-    IniNode(std::string root, std::string key, std::string value)
-    {
-        this->root = root;
-        this->key = key;
-        this->value = value;
-    }
-    std::string root;
-    std::string key;
-    std::string value;
-};
-
-//键值对结构体
-class SubNode
-{
-public:
-    static void InsertElement(std::string key, std::string value)
-    {
-        sub_node.insert(std::pair<std::string, std::string>(key, value));
-    }
-
-    static std::map<std::string, std::string> sub_node;
 };
