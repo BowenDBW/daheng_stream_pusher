@@ -5,6 +5,12 @@
 #include <mutex>
 #include <opencv2/opencv.hpp>
 
+extern "C"
+{
+#include <libswscale/swscale.h>
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+}
 #include <QLabel>
 
 

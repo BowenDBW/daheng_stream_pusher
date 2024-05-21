@@ -35,6 +35,11 @@ void DahengStreamPusher::init() {
     ui.savePathEdit->setText(QString::fromStdString(IniParser::getSavePath()));
     ui.serverEdit->setText(QString::fromStdString(IniParser::getRtmpUrl()));
 
+    onBoxClicked();
+    onIntervalChanged();
+    onRtmpUrlChanged();
+    onSavePathChanged();
+
     ImageConverter::setPixmap(ui.imagePixmap);
     scanDevices();
 }

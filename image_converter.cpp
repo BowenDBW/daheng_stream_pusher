@@ -116,6 +116,7 @@ void ImageConverter::reset() {
 }
 
 void ImageConverter::rtmpStreaming(cv::Mat* rawMat) {
+
 	if (pushStream) {
 
 	}
